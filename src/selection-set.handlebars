@@ -1,0 +1,3 @@
+{{#each this}}
+{{#if @root.config.immutableTypes }}readonly {{/if}}{{ name }}{{ getOptionals this }}: {{ convertedType this }}; {{ toComment description }}
+{{/each}}

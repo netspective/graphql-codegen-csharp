@@ -1,0 +1,6 @@
+{{ toComment description }}
+public class {{ name }}{{#if hasInterfaces}} : {{#each interfaces}}I{{this}}{{#unless @last}},{{/unless}}{{/each}}{{/if}} {
+{{#each fields}}
+  {{#if @root.config.immutableTypes }}readonly {{/if}}public {{ convertedType this }} {{toPascalCase name }}{{ getOptionals this }}; {{ toComment description }}
+{{/each}}
+}

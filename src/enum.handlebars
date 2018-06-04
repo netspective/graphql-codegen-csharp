@@ -1,0 +1,10 @@
+{{ toComment description }}
+{{#if @root.config.enumsAsTypes }}
+public enum {{ name }} = {{#each values }}"{{ value }}"{{#unless @last}} | {{/unless}}{{/each}};
+{{else}}
+public enum {{ name }} {
+{{#each values }}
+  {{value}}{{#unless @last}}, {{/unless}}
+{{/each}}
+}
+{{/if}}

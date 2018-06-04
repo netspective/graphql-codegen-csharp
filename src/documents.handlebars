@@ -1,0 +1,46 @@
+{{#each operations }}
+namespace {{ toPascalCase name }} {
+  public Variables = {
+  {{#each variables}}
+    {{#if @root.config.immutableTypes }}readonly {{/if}}{{ name }}{{ getOptionals this }} = new {{ convertedType this }}();
+  {{/each}}
+  }
+
+  public {{ toPascalCase operationType }} ={{#if hasFields}} {
+    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = new "{{ toPascalCase operationType }}";
+    {{> selectionSet fields }}
+  }{{/if}}{{> fragments this }}
+  {{#each innerModels }}
+
+  public {{ modelType }} ={{#if hasFields}} {
+  {{#unless hasInlineFragments}}
+    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = "{{ schemaBaseType }}";
+  {{else}}
+    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = {{#each inlineFragments}}{{onType}}{{/each}};
+  {{/unless}}
+    {{> selectionSet fields }}
+  }{{/if}}{{> fragments this }}
+  {{/each}}
+}
+{{/each}}
+{{#each fragments }}
+
+namespace {{name}} {
+  public Fragment ={{#if hasFields}} {
+    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = "{{ onType }}";
+    {{> selectionSet fields }}
+  }{{/if}}{{> fragments this }}
+  {{#each innerModels }}
+
+  public {{ modelType }} = {{#if hasFields}} {
+  {{#unless hasInlineFragments}}
+    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = "{{ schemaBaseType }}";
+  {{else}}
+    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = {{#each inlineFragments}}{{onType}}{{/each}}();
+  {{/unless}}
+    {{> selectionSet fields }}
+  }{{/if}}{{> fragments this }}
+  {{/each}}
+}
+{{/each}}
+
