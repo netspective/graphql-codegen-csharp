@@ -1,6 +1,7 @@
-{{ toComment description }}
+{{ toCsharpComment description }}
 public interface I{{ name }}{{#if hasInterfaces}} : {{#each interfaces}}{{this}}{{#unless @last}},{{/unless}}{{/each}}{{/if}} {
 {{#each fields}}
-  {{#if @root.config.immutableTypes }}readonly {{/if}}{{ convertedType this }} {{ name }}{{ getOptionals this }}{ get; set; } {{ toComment description }}
+  {{ toCsharpComment description }}
+  {{ convertedType this }} {{ name }}{{ getOptionals this }}{ get; set; } 
 {{/each}}
 }

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 {{#each interfaces}}
   {{~> interfaces }}
 
@@ -16,7 +19,7 @@
 public class {{ toPascalCase name }}{{ toPascalCase ../name }}Args 
 {
 {{#each arguments}}
-  {{ toComment description }}
+  {{ toCsharpComment description }}
   [JsonProperty("{{ name }}")]
   public {{ convertedType this }} {{ toPascalCase name }}{{ getOptionals this }} { get; set; } 
 {{/each}}
@@ -29,7 +32,7 @@ public class {{ toPascalCase name }}{{ toPascalCase ../name }}Args
   {{~> enum }}
 {{/each}}
 {{#each unions}}
-{{ toComment description }}
+{{ toCsharpComment description }}
 public class {{ name }} = {{#each possibleTypes}}{{this}}{{#unless @last}} | {{/unless}}{{/each}};
 
 {{/each}}

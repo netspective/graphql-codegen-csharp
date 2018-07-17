@@ -15,6 +15,23 @@ export function getType(type, options) {
     result = `List<${result}>`;
     return new SafeString(result);
   } else {
+    
+    if(realType === "Long"){
+      return "long";
+    }
+
+    if(realType === "BigDecimal"){
+      return "decimal";
+    }
+
+    if(realType === "Float32Bit"){
+      return "float";
+    }
+
+    if(realType == "LocalTime"){
+      return "DateTime";
+    }
+
     return realType;
   }
 }
