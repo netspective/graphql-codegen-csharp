@@ -34,5 +34,6 @@ export const config: GeneratorConfig = {
     convertedType: getType,
     getOptionals
   },
-  outFile: 'Classes.cs'
+  outFile: 'Classes.cs',
+  //filesExtension: 'cs',
 };
