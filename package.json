@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@types/common-tags": "1.4.0",
+    "awesome-typescript-loader": "^5.2.0",
     "codegen-handlebars-templates-scripts": "0.9.1",
     "common-tags": "1.8.0",
     "graphql-codegen-compiler": "0.9.1",
@@ -39,5 +40,8 @@
       "json",
       "node"
     ]
+  },
+  "dependencies": {
+    "graphql": "^0.13.2"
   }
 }
