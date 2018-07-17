@@ -6,15 +6,3 @@ public class {{ name }}{{#if hasInterfaces}} : {{#each interfaces}}I{{this}}{{#u
   public {{ convertedType this }} {{toPascalCase name }}{{ getOptionals this }} { get; set; } {{ toComment description }}
 {{/each}}
 }
-
-public class {{ name }}Type : ObjectGraphType<{{ name }}> 
-{
-  public {{ name }}Type()
-  {
-    Name = "{{ name }}";
-    Description = "{{ name }}";
-{{#each fields}}
-    Field(d => d.{{toPascalCase name }}).Description("{{toPascalCase name }}");
-{{/each}}
-  }
-}

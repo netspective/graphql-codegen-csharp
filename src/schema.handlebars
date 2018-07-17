@@ -1,8 +1,3 @@
-{{#each scalars}}
-
-{{ toComment description }}
-public {{ name }} {{ name }} = new {{ name }}();
-{{/each}}
 {{#each interfaces}}
   {{~> interfaces }}
 
@@ -18,11 +13,15 @@ public {{ name }} {{ name }} = new {{ name }}();
 {{~#each types}}
   {{~#each fields}}
     {{~# if hasArguments }}
-public interface {{ toPascalCase name }}{{ toPascalCase ../name }}Args {
+public class {{ toPascalCase name }}{{ toPascalCase ../name }}Args 
+{
 {{#each arguments}}
-  public {{ convertedType this }} {{ name }}{{ getOptionals this }}; {{ toComment description }}
+  {{ toComment description }}
+  [JsonProperty("{{ name }}")]
+  public {{ convertedType this }} {{ toPascalCase name }}{{ getOptionals this }} { get; set; } 
 {{/each}}
 }
+
     {{/if}}
   {{/each}}
 {{/each}}
