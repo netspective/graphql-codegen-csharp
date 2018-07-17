@@ -35,5 +35,5 @@ export const config: GeneratorConfig = {
     getOptionals
   },
   outFile: 'Classes.cs',
-  //filesExtension: 'cs',
+  //filesExtension: 'cs',  
 };

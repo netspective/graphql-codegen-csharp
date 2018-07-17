@@ -1,3 +1,4 @@
 {{#each this}}
-{{#if @root.config.immutableTypes }}readonly {{/if}}{{ name }}{{ getOptionals this }}: {{ convertedType this }}; {{ toComment description }}
+[JsonProperty("{{ name }}")]
+public {{ convertedType this }} {{ toPascalCase name }}{{ getOptionals this }} { get; set; } {{ toComment description }}
 {{/each}}
