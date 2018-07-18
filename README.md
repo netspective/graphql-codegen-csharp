@@ -1,6 +1,3 @@
----
-
----
 
 # CSharp template
 
@@ -12,28 +9,26 @@ The name of the output file can be defined in `src/config.ts`
 
 ## Usage
 
-For executing the template, install [**graphql-code-generator**](https://github.com/dotansimha/graphql-code-generator) first. See the install instructions [here](https://github.com/dotansimha/graphql-code-generator#installation).
-
-Once we install graphql-code-generator, clone this project into your workspace.
+For executing the template, install [**graphql-code-generator**](https://github.com/dotansimha/graphql-code-generator) first. See the install instructions [here](https://github.com/dotansimha/graphql-code-generator#installation) or you can go through the steps below.
 
 
+Open command prompt and go to working directory.
 
-After cloning the project, we can either install or build the template to function the graphql code generator.
+Execute `yarn add -D graphql-code-generator graphql`
 
-Install the template using `npm install` command from the project folder path.
+Clone graphql-codegen-csharp in this directory
 
-`npm install -g`
+```
+cd graphql-codegen-csharp
 
-After installing the template, run the following command to generate the c# code from the graphql schema.
+npm install
+```
+Execute a `yarn build` from the template folder so that a `dist` folder is created in it.
 
-`gql-gen --schema "graphQL schema JSON path" --template "graphql-codegen-csharp" --out "output folder path"`
+```
+cd ..
+```
+Execute `yarn gql-gen --schema "graphQL schema JSON path" --template graphql-codegen-csharp --out  "output folder path"`.
 
- You can either build the template using `yarn build` command and run the following command to run the generator.
 
-`gql-gen --schema "graphQL schema JSON" --template "path of the template file" --out "output folder path"`
-
-Other **Cli** Flag options are listed [here](https://github.com/dotansimha/graphql-code-generator#cli-options).
-
-Once the C# code got generated, add the file into class library project in Visual Studio.
-
-Build the project and check if any type errors are there.
+Other **CLI** Flag options are listed [here](https://github.com/dotansimha/graphql-code-generator#cli-options).
