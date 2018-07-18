@@ -1,22 +1,75 @@
+public interface IQuery 
+{
+  string GetQueryText();
+  object GetParsedObject(string jsonText);
+}
+
+public interface IQuery<T> : IQuery 
+{
+  new T GetParsedObject(string jsonText);
+}
+
+
 {{#each operations }}
 namespace {{ toPascalCase name }} {
-  public class Variables 
-  {
-  {{#each variables}}
-    public {{ convertedType this }}{{ getOptionals this }} {{ name }} { get; set; }
-  {{/each}}
+
+  {{ toCsharpComment "Operation Type" }}
+  public class {{ toPascalCase operationType }} : IQuery<Data>
+  { 
+    {{#each variables}}
+    private readonly {{ convertedType this }} _{{ name }};
+    {{/each}}
+
+    public {{ toPascalCase operationType }}({{asArgumentList variables}})
+    {
+      {{#each variables}}
+      _{{ name }} = {{ name }};
+      {{/each}}
+    }
+
+    public string GetQueryText()
+    {
+      return JsonConvert.SerializeObject(new
+        {
+            query = @"
+{{asQueryUnescapedText document}}",
+            variables = new {
+              {{#each variables}}{{ name }} = _{{ name }},{{/each}}
+            }
+        });
+    }
+
+    public Data GetParsedObject(string jsonText)
+    {
+      return JsonConvert.DeserializeObject<Data>(jsonText);
+    }
+
+    string IQuery.GetQueryText()
+    {
+      return GetQueryText();
+    }
+
+    Data IQuery<Data>.GetParsedObject(string jsonText)
+    {
+      return GetParsedObject(jsonText);
+    }
+
+    object IQuery.GetParsedObject(string jsonText)
+    {
+      return GetParsedObject(jsonText);
+    }
   }
 
-  public class {{ toPascalCase operationType }}
-  { 
+  public class Data
+  {
   {{#if hasFields}}    
     {{> selectionSet fields }}
-  }
   {{/if}}  
-  
+  }
+
   {{> fragments this }}
   {{#each innerModels }}
-
+  {{ toCsharpComment "Inner Model" }}
   public class {{ modelType }} 
   {
   {{#if hasFields}}     

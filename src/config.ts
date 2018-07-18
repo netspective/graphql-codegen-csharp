@@ -7,9 +7,7 @@ import * as selectionSet from './selection-set.handlebars';
 import * as fragments from './fragments.handlebars';
 import * as enumTemplate from './enum.handlebars';
 import { EInputType, GeneratorConfig } from 'graphql-codegen-core';
-import { getType } from './helpers/get-type';
-import { getOptionals } from './helpers/get-optionals';
-import { toCsharpComment } from './helpers/csharpSyntax';
+import { getType, getOptionals, toCsharpComment, asQueryUnescapedText, asArgumentList } from './helpers/csharpSyntax';
 
 export const config: GeneratorConfig = {
   inputType: EInputType.SINGLE_FILE,
@@ -34,7 +32,9 @@ export const config: GeneratorConfig = {
   customHelpers: {
     convertedType: getType,
     getOptionals,
-    toCsharpComment : toCsharpComment
+    toCsharpComment,
+    asQueryUnescapedText,
+    asArgumentList
   },
   outFile: 'Classes.cs',
   //filesExtension: 'cs',  
