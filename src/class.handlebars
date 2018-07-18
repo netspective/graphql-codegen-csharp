@@ -1,18 +1,20 @@
 {{ toComment description }}
 public class {{ name }}{{#if hasInterfaces}} : {{#each interfaces}}I{{this}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}} {
-{{#each fields}}
-{{#if @root.config.immutableTypes }}readonly {{/if}}private {{ convertedType this }} {{toCamelCase name }}{{ getOptionals this }}; {{ toComment description }}
-  {{#if @root.config.immutableTypes }}readonly {{/if}}public {{ convertedType this }} {{toPascalCase name }}{{ getOptionals this }} { get { return {{toCamelCase name }};} set { {{toCamelCase name }} = value; }} {{ toComment description }}
-{{/each}}
+    {{#each fields}}
+    {{#if @root.config.immutableTypes }}readonly {{/if}}private {{#ifCond this.type "==" 'Date'}}DateTime{{else}}{{#ifCond this.type "==" 'Email'}}String{{else}}{{#ifCond this.type "==" 'Language'}}String{{else}}{{ convertedType this }}{{/ifCond}}{{/ifCond}}{{/ifCond}} {{toCamelCase name }}{{ getOptionals this }}; {{ toComment description }}
+    {{#if @root.config.immutableTypes }}readonly {{/if}}public {{#ifCond this.type "==" 'Date'}}DateTime{{else}}{{#ifCond this.type "==" 'Email'}}String{{else}}{{#ifCond this.type "==" 'Language'}}String{{else}}{{ convertedType this }}{{/ifCond}}{{/ifCond}}{{/ifCond}} {{toPascalCase name }}{{ getOptionals this }} { get { return {{toCamelCase name }};} set { {{toCamelCase name }} = value; }} {{ toComment description }}
+    {{/each}}
 }
-
-public class {{ name }}Type : ObjectGraphType<{{ name }}> {
-  public {{ name }}Type()
+{{#ifCond name "!=" 'Query'}}
+public class {{ name }}GraphType : ObjectGraphType<{{ name }}> {
+    public {{ name }}GraphType()
         {
-          Name = "{{ name }}";
-          Description = "{{ name }}";
-{{#each fields}}
-Field(d => d.{{toPascalCase name }}).Description("{{toPascalCase name }}");
-{{/each}}
+            Name = "{{ name }}";
+            Description = "{{ name }} has no description.";
+            {{#fields}}
+                Field(d => d.{{toPascalCase name }} {{#if this.isEnum}}, type: typeof({{this.type}}EnumType){{/if}}{{#ifCond this.raw "==" 'Boolean'}}, type: typeof(BooleanGraphType){{/ifCond}} {{#if this.isType}}, type: typeof({{this.type}}GraphType){{/if}}{{#ifCond this.type "==" 'String'}}, type: typeof(StringGraphType){{/ifCond}}{{#ifCond this.type "==" 'Date'}}, type: typeof(StringGraphType){{/ifCond}}{{#ifCond this.type "==" 'DateTime'}}, type: typeof(StringGraphType){{/ifCond}}{{#ifCond this.type "==" 'Email'}}, type: typeof(StringGraphType){{/ifCond}}{{#if this.isRequired}}{{else}}, nullable: true{{/if}}).Description("{{toPascalCase name }}");              
+                
+            {{/fields}}
         }
 }
+{{/ifCond}}
