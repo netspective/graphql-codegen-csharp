@@ -7,14 +7,18 @@ import * as selectionSet from './selection-set.handlebars';
 import * as fragments from './fragments.handlebars';
 import * as enumTemplate from './enum.handlebars';
 import { EInputType, GeneratorConfig } from 'graphql-codegen-core';
-import { getType, getOptionals, toCsharpComment, asQueryUnescapedText, asArgumentList } from './helpers/csharpSyntax';
+import { 
+  getType, 
+  getOptionals, 
+  toCsharpComment, asQueryUnescapedText, asArgumentList, eq, asJsonString, 
+  isMutation,
+  } from './helpers/csharpSyntax';
 
 export const config: GeneratorConfig = {
   inputType: EInputType.SINGLE_FILE,
   templates: {
     index,
-    classes,
-    interfaces,
+    classes,   
     schema,
     documents,
     selectionSet,
@@ -34,7 +38,10 @@ export const config: GeneratorConfig = {
     getOptionals,
     toCsharpComment,
     asQueryUnescapedText,
-    asArgumentList
+    asArgumentList,
+    eq,
+    asJsonString,
+    isMutation,    
   },
   outFile: 'Classes.cs',
   //filesExtension: 'cs',  

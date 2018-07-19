@@ -1,7 +1,0 @@
-{{ toCsharpComment description }}
-public interface I{{ name }}{{#if hasInterfaces}} : {{#each interfaces}}{{this}}{{#unless @last}},{{/unless}}{{/each}}{{/if}} {
-{{#each fields}}
-  {{ toCsharpComment description }}
-  {{ convertedType this }} {{ name }}{{ getOptionals this }}{ get; set; } 
-{{/each}}
-}

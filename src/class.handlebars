@@ -1,8 +1,9 @@
-{{ toCsharpComment description }}
-public class {{ name }}{{#if hasInterfaces}} : {{#each interfaces}}I{{this}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}} 
-{
+
+    {{ toCsharpComment description }}
+    public class {{ name }}
+    {
 {{#each fields}}
-  {{ toCsharpComment description }}
-  public {{ convertedType this }} {{toPascalCase name }}{{ getOptionals this }} { get; set; } 
+      {{ toCsharpComment description }}
+      public {{ convertedType this }} {{toPascalCase name }} { get; set; } 
 {{/each}}
-}
+    }

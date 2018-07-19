@@ -1,17 +1,23 @@
-public interface IQuery 
-{
-  string GetQueryText();
-  object GetParsedObject(string jsonText);
-}
 
-public interface IQuery<T> : IQuery 
+// Query start 
+
+namespace Generated
 {
-  new T GetParsedObject(string jsonText);
+  public interface IQuery 
+  {
+    string GetQueryText();
+    object GetParsedObject(string jsonText);
+  }
+
+  public interface IQuery<T> : IQuery 
+  {
+    new T GetParsedObject(string jsonText);
+  }
 }
 
 
 {{#each operations }}
-namespace {{ toPascalCase name }} {
+namespace Generated.{{ toPascalCase name }} {
 
   {{ toCsharpComment "Operation Type" }}
   public class {{ toPascalCase operationType }} : IQuery<Data>
@@ -69,7 +75,7 @@ namespace {{ toPascalCase name }} {
 
   {{> fragments this }}
   {{#each innerModels }}
-  {{ toCsharpComment "Inner Model" }}
+  {{ toCsharpComment "Inner Model" }} 
   public class {{ modelType }} 
   {
   {{#if hasFields}}     
@@ -81,7 +87,7 @@ namespace {{ toPascalCase name }} {
 {{/each}}
 {{#each fragments }}
 
-namespace {{name}} {
+namespace Generated.{{name}} {
   public class Fragment
   {
 {{#if hasFields}} {
@@ -98,3 +104,4 @@ namespace {{name}} {
 }
 {{/each}}
 
+// Query end
