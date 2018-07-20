@@ -4,7 +4,7 @@
 
 # CSharp Generator for Queries
 
-https://gist.github.com/jenol/a07b2fe602c8bb0c9b7aefe89f745eae
+<script src="https://gist.github.com/jenol/a07b2fe602c8bb0c9b7aefe89f745eae.js"></script>
 
 
 # CSharp template
