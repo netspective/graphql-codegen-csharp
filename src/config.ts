@@ -23,7 +23,6 @@ export const config: GeneratorConfig = {
     documents,
     selectionSet,
     fragments,
-    enum: enumTemplate
   },
   flattenTypes: true,
   primitives: {

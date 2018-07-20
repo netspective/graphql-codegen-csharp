@@ -1,102 +1,112 @@
 
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
 // Query start 
 
 namespace Generated
 {
-  public interface IQuery 
-  {
-    string GetQueryText();
-    object GetParsedObject(string jsonText);
-  }
+    public interface IQuery
+    {
+        string GetQueryText();
+        object GetParsedObject(string jsonText);
+    }
 
-  public interface IQuery<T> : IQuery 
-  {
-    new T GetParsedObject(string jsonText);
-  }
+    public interface IQuery<T> : IQuery
+    {
+        new T GetParsedObject(string jsonText);
+    }
 }
 
 
 {{#each operations }}
-namespace Generated.{{ toPascalCase name }} {
+namespace Generated.{{ toPascalCase name }} 
+{
 
-  {{ toCsharpComment "Operation Type" }}
-  public class {{ toPascalCase operationType }} : IQuery<Data>
-  { 
+    {{ toCsharpComment "Operation Type" }}
+    public class {{ toPascalCase operationType }} : IQuery<Data>
+    { 
     {{#each variables}}
-    private readonly {{ convertedType this }} _{{ name }};
+        private readonly {{ convertedType this }} _{{ name }};
     {{/each}}
 
-    public {{ toPascalCase operationType }}({{asArgumentList variables}})
-    {
+        public {{ toPascalCase operationType }}({{asArgumentList variables}})
+        {
       {{#each variables}}
-      _{{ name }} = {{ name }};
+            _{{ name }} = {{ name }};
       {{/each}}
-    }
+        }
 
     public string GetQueryText()
     {
-      return JsonConvert.SerializeObject(new
+        return JsonConvert.SerializeObject(new
         {
             query = @"
 {{asQueryUnescapedText document}}",
             variables = new {
-              {{#each variables}}{{ name }} = _{{ name }},{{/each}}
-            }
-        });
+                    {{#each variables}}{{ name }} = _{{ name }},{{/each}}
+                }
+            });
+        }  
+
+        public Data GetParsedObject(string jsonText)
+        {
+            return JsonConvert.DeserializeObject<Result>(jsonText).Data;
+        }
+
+        string IQuery.GetQueryText()
+        {
+            return GetQueryText();
+        }
+
+        Data IQuery<Data>.GetParsedObject(string jsonText)
+        {
+            return GetParsedObject(jsonText);
+        }
+
+        object IQuery.GetParsedObject(string jsonText)
+        {
+            return GetParsedObject(jsonText);
+        }
     }
 
-    public Data GetParsedObject(string jsonText)
+    public class Result
     {
-      return JsonConvert.DeserializeObject<Data>(jsonText);
+        [JsonProperty("data")]
+        public Data Data { get; set; }
     }
 
-    string IQuery.GetQueryText()
+    public class Data
     {
-      return GetQueryText();
-    }
-
-    Data IQuery<Data>.GetParsedObject(string jsonText)
-    {
-      return GetParsedObject(jsonText);
-    }
-
-    object IQuery.GetParsedObject(string jsonText)
-    {
-      return GetParsedObject(jsonText);
-    }
-  }
-
-  public class Data
-  {
   {{#if hasFields}}    
-    {{> selectionSet fields }}
+        {{> selectionSet fields }}
   {{/if}}  
-  }
+    }
 
-  {{> fragments this }}
+    {{> fragments this }}
   {{#each innerModels }}
-  {{ toCsharpComment "Inner Model" }} 
-  public class {{ modelType }} 
-  {
+    {{ toCsharpComment "Inner Model" }} 
+    public class {{ modelType }} 
+    {
   {{#if hasFields}}     
-    {{> selectionSet fields }}
-  }{{/if}}{{> fragments this }}
+        {{> selectionSet fields }}
+    }{{/if}}{{> fragments this }}
   {{/each}}
-
 }
+
 {{/each}}
 {{#each fragments }}
 
 namespace Generated.{{name}} {
-  public class Fragment
-  {
+    public class Fragment
+    {
 {{#if hasFields}} {
     {{> selectionSet fields }}
   }{{/if}}{{> fragments this }}
   {{#each innerModels }}
 
-  public class {{ modelType }} 
-  {
+    public class {{ modelType }} 
+    {
 {{#if hasFields}} { 
     {{> selectionSet fields }}
   }{{/if}}{{> fragments this }}
