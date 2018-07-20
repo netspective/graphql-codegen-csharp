@@ -1,7 +1,7 @@
 {
-  "name": "graphql-codegen-csharp",
+  "name": "agoda-graphql-codegen-csharp",
   "version": "0.0.1",
-  "description": "",
+  "description": "---",
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "yarn build",
@@ -43,5 +43,17 @@
   },
   "dependencies": {
     "graphql": "^0.13.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agoda-com/graphql-codegen-csharp.git"
+  },
+  "keywords": [
+    "graphql"
+  ],
+  "author": "Agoda",
+  "bugs": {
+    "url": "https://github.com/agoda-com/graphql-codegen-csharp/issues"
+  },
+  "homepage": "https://github.com/agoda-com/graphql-codegen-csharp#readme"
 }
