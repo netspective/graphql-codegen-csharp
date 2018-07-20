@@ -1,7 +1,3 @@
----
-
----
-
 # CSharp Generator for Queries
 
 We forked @netspective 's (Thanks dude!) project and changed it so the templates emit only the query objects and models. In our case it is better to work off the queries than having a query builder. 
@@ -50,4 +46,4 @@ Build the project and check if any type errors are there.
 
 # Examples
 
-<script src="https://gist.github.com/jenol/a07b2fe602c8bb0c9b7aefe89f745eae.js"></script>
+dummy.graphql https://gist.github.com/jenol/a07b2fe602c8bb0c9b7aefe89f745eae.js
