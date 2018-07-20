@@ -1,46 +1,117 @@
+
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
+// Query start 
+
+namespace Generated
+{
+    public interface IQuery
+    {
+        string GetQueryText();
+        object GetParsedObject(string jsonText);
+    }
+
+    public interface IQuery<T> : IQuery
+    {
+        new T GetParsedObject(string jsonText);
+    }
+}
+
+
 {{#each operations }}
-namespace {{ toPascalCase name }} {
-  public Variables = {
-  {{#each variables}}
-    {{#if @root.config.immutableTypes }}readonly {{/if}}{{ name }}{{ getOptionals this }} = new {{ convertedType this }}();
-  {{/each}}
-  }
+namespace Generated.{{ toPascalCase name }} 
+{
 
-  public {{ toPascalCase operationType }} ={{#if hasFields}} {
-    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = new "{{ toPascalCase operationType }}";
-    {{> selectionSet fields }}
-  }{{/if}}{{> fragments this }}
+    {{ toCsharpComment "Operation Type" }}
+    public class {{ toPascalCase operationType }} : IQuery<Data>
+    { 
+    {{#each variables}}
+        private readonly {{ convertedType this }} _{{ name }};
+    {{/each}}
+
+        public {{ toPascalCase operationType }}({{asArgumentList variables}})
+        {
+      {{#each variables}}
+            _{{ name }} = {{ name }};
+      {{/each}}
+        }
+
+    public string GetQueryText()
+    {
+        return JsonConvert.SerializeObject(new
+        {
+            query = @"
+{{asQueryUnescapedText document}}",
+            variables = new {
+                    {{#each variables}}{{ name }} = _{{ name }},{{/each}}
+                }
+            });
+        }  
+
+        public Data GetParsedObject(string jsonText)
+        {
+            return JsonConvert.DeserializeObject<Result>(jsonText).Data;
+        }
+
+        string IQuery.GetQueryText()
+        {
+            return GetQueryText();
+        }
+
+        Data IQuery<Data>.GetParsedObject(string jsonText)
+        {
+            return GetParsedObject(jsonText);
+        }
+
+        object IQuery.GetParsedObject(string jsonText)
+        {
+            return GetParsedObject(jsonText);
+        }
+    }
+
+    public class Result
+    {
+        [JsonProperty("data")]
+        public Data Data { get; set; }
+    }
+
+    public class Data
+    {
+  {{#if hasFields}}    
+        {{> selectionSet fields }}
+  {{/if}}  
+    }
+
+    {{> fragments this }}
   {{#each innerModels }}
-
-  public {{ modelType }} ={{#if hasFields}} {
-  {{#unless hasInlineFragments}}
-    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = "{{ schemaBaseType }}";
-  {{else}}
-    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = {{#each inlineFragments}}{{onType}}{{/each}};
-  {{/unless}}
-    {{> selectionSet fields }}
-  }{{/if}}{{> fragments this }}
+    {{ toCsharpComment "Inner Model" }} 
+    public class {{ modelType }} 
+    {
+  {{#if hasFields}}     
+        {{> selectionSet fields }}
+    }{{/if}}{{> fragments this }}
   {{/each}}
 }
+
 {{/each}}
 {{#each fragments }}
 
-namespace {{name}} {
-  public Fragment ={{#if hasFields}} {
-    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = "{{ onType }}";
+namespace Generated.{{name}} {
+    public class Fragment
+    {
+{{#if hasFields}} {
     {{> selectionSet fields }}
   }{{/if}}{{> fragments this }}
   {{#each innerModels }}
 
-  public {{ modelType }} = {{#if hasFields}} {
-  {{#unless hasInlineFragments}}
-    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = "{{ schemaBaseType }}";
-  {{else}}
-    {{#if @root.config.immutableTypes }}readonly {{/if}}__typename = {{#each inlineFragments}}{{onType}}{{/each}}();
-  {{/unless}}
+    public class {{ modelType }} 
+    {
+{{#if hasFields}} { 
     {{> selectionSet fields }}
   }{{/if}}{{> fragments this }}
   {{/each}}
 }
 {{/each}}
 
+// Query end

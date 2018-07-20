@@ -1,18 +1,9 @@
-{{ toComment description }}
-public class {{ name }}{{#if hasInterfaces}} : {{#each interfaces}}I{{this}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}} {
-{{#each fields}}
-{{#if @root.config.immutableTypes }}readonly {{/if}}private {{ convertedType this }} {{toCamelCase name }}{{ getOptionals this }}; {{ toComment description }}
-  {{#if @root.config.immutableTypes }}readonly {{/if}}public {{ convertedType this }} {{toPascalCase name }}{{ getOptionals this }} { get { return {{toCamelCase name }};} set { {{toCamelCase name }} = value; }} {{ toComment description }}
-{{/each}}
-}
 
-public class {{ name }}Type : ObjectGraphType<{{ name }}> {
-  public {{ name }}Type()
-        {
-          Name = "{{ name }}";
-          Description = "{{ name }}";
+    {{ toCsharpComment description }}
+    public class {{ name }}
+    {
 {{#each fields}}
-Field(d => d.{{toPascalCase name }}).Description("{{toPascalCase name }}");
+      {{ toCsharpComment description }}
+      public {{ convertedType this }} {{toPascalCase name }} { get; set; } 
 {{/each}}
-        }
-}
+    }
