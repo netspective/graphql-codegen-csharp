@@ -10,7 +10,7 @@ install:
   - npm install --save-dev graphql-code-generator graphql  
   - npm install
   - yarn build
-  - cmd 'gql-gen --schema "graphQL schema JSON" --template "path of the template file" --out "output folder path"'
+  - cmd 'node gql-gen --schema samples/GitHub/input/GitHubSchema.json --template graphql-codegen-csharp --out output samples/GitHub/input/*.graphql'
 
 
 # Post-install test scripts.
