@@ -6,7 +6,7 @@ environment:
 install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
-  - script: build.ps1
+  - ps: .\ build.ps1
 
 
 # Post-install test scripts.

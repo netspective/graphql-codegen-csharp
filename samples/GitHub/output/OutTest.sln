@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutTest2", "OutTest2\OutTest2.csproj", "{49218F1C-A7FC-4535-A99C-BE010E0B8890}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutTest", "OutTest\OutTest.csproj", "{49218F1C-A7FC-4535-A99C-BE010E0B8890}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
