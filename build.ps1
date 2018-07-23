@@ -12,7 +12,7 @@ Write-Output "-------------------------------------------"
 Write-Output "Node: $nodeVersion, Npm: $npmVersion, Yarn: $yarnVersion"
 Write-Output "-------------------------------------------"
 Write-Output "Build project"
-yarn install
+yarn install -ErrorAction SilentlyContinue
 yarn build
 Write-Output "-------------------------------------------"
 Write-Output "Running Generator"
