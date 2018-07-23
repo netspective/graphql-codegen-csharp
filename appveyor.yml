@@ -10,16 +10,7 @@ cache:
 install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
-  - script: build.ps1
-
-
-# Post-install test scripts.
-#test_script:
-  # Output useful info for debugging.
-  #- node --version
-  #- npm --version
-  # run tests
-  #- npm test
+  - ps: build.ps1
 
 before_build:
   - nuget restore samples\GitHub\output\OutTest.sln
