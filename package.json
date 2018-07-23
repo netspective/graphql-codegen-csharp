@@ -15,7 +15,9 @@
     "codegen-handlebars-templates-scripts": "0.9.1",
     "common-tags": "1.8.0",
     "graphql-codegen-compiler": "0.9.1",
-    "graphql-codegen-core": "0.9.1"
+    "graphql-codegen-core": "0.9.1",
+    "tslint": "^5.11.0",
+    "typescript": "^2.9.2"
   },
   "main": "./dist/index.js",
   "typings": "dist/index.d.ts",
