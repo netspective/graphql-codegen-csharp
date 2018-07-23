@@ -1,0 +1,25 @@
+query MyQuery($login: String = rails, $repo: String = rails) {
+  organization(login: $login) {
+    name
+    url
+    repository(name: $repo) {
+      name
+      pullRequests(last: 10, states: [OPEN]) {
+        edges {
+          node {
+            title
+            comments(last: 10) {
+              edges {
+                node {
+                  author {
+                    login
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
