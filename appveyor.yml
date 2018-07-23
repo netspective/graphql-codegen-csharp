@@ -22,7 +22,7 @@ install:
   #- npm test
 
 before_build:
-  - nuget restore
+  - nuget restore samples\GitHub\output\OutTest.sln
 
 build:
   project: samples\GitHub\output\OutTest.sln
