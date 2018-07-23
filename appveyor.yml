@@ -6,11 +6,7 @@ environment:
 install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
-  # install modules  
-  - npm install --save-dev graphql-code-generator graphql  
-  - npm install
-  - yarn build
-  - cmd 'node gql-gen --schema samples/GitHub/input/GitHubSchema.json --template graphql-codegen-csharp --out output samples/GitHub/input/*.graphql'
+  - script: build.ps1
 
 
 # Post-install test scripts.
@@ -21,5 +17,5 @@ install:
   # run tests
   #- npm test
 
-# Don't actually build.
-build: off
+build:
+  project: samples/output/OutTest.sln
