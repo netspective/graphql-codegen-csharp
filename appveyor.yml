@@ -2,6 +2,10 @@
 environment:
   nodejs_version: "6"
 
+cache: 
+  - packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
+  - node_modules                    # local npm modules
+
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of Node.js or io.js
@@ -16,6 +20,9 @@ install:
   #- npm --version
   # run tests
   #- npm test
+
+before_build:
+  - nuget restore
 
 build:
   project: samples\GitHub\output\OutTest.sln
