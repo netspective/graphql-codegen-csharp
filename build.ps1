@@ -12,6 +12,7 @@ Write-Output "-------------------------------------------"
 Write-Output "Node: $nodeVersion, Npm: $npmVersion, Yarn: $yarnVersion"
 Write-Output "-------------------------------------------"
 Write-Output "Build project"
+yarn install
 yarn build
 Write-Output "-------------------------------------------"
 Write-Output "Running Generator"
@@ -29,8 +30,3 @@ Write-Output "Template Path: $templatePath"
 yarn gql-gen --schema $schemaPath --template $templatePath --out $outPath $queryPath
 
 Write-Output "-------------------------------------------"
-
-#$outSlnProjectPath = Join-Path $scriptDir "samples/GitHub/output/OutTest.sln"
-
-#$msbuild = "C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe"
-#& $msbuild $outSlnProjectPath /target:Clean /target:Build
