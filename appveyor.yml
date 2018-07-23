@@ -18,4 +18,4 @@ install:
   #- npm test
 
 build:
-  project: samples/output/OutTest.sln
+  project: /samples/output/OutTest.sln
