@@ -5,6 +5,7 @@ environment:
 cache: 
   - packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
   - node_modules                    # local npm modules
+  - '%APPDATA%\npm-cache'
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -15,5 +16,10 @@ install:
 before_build:
   - nuget restore samples\GitHub\output\OutTest.sln
 
+test: off
+
 build:
   project: samples\GitHub\output\OutTest.sln
+
+after_build:
+  - ps: .\publish.ps1
