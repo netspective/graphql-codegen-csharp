@@ -23,12 +23,3 @@ build:
 
 after_build:
   - ps: .\publish.ps1
-
-deploy_script:
-  - ps: |
-      if ($ENV:CONFIGURATION -eq "publish")
-      {
-        "//registry.npmjs.org/:_authToken=`$`{NPM_TOKEN`}" | Out-File (Join-Path $ENV:APPVEYOR_BUILD_FOLDER ".npmrc") -Encoding UTF8
-        iex "npm pack"
-        iex "npm publish"
-      }
