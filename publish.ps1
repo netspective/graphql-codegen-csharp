@@ -19,7 +19,3 @@ $packageJson.version = $version
 $jsonText = ConvertTo-Json -InputObject $packageJson 
 
 $jsonText | Out-File $packagePath -Encoding ascii
-
-npm publish
-
-
