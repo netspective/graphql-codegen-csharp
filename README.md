@@ -44,6 +44,12 @@ Once the C# code got generated, add the file into class library project in Visua
 
 Build the project and check if any type errors are there.
 
+## CI
+
+### AppVeyor
+
+https://ci.appveyor.com/project/jenol/graphql-codegen-csharp
+
 ## Examples
 
 ### Queries

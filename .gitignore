@@ -3,3 +3,8 @@ npm-debug.log
 dist
 temp
 yarn-error.log
+/samples/GitHub/output/OutTest/bin
+/samples/GitHub/output/OutTest/obj
+/samples/GitHub/output/.vs
+/samples/GitHub/output/packages
+/samples/GitHub/output/OutTest/GitHubSchema.cs

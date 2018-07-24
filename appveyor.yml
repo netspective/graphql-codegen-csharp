@@ -1,21 +1,19 @@
 # Test against the latest version of this Node.js version
 environment:
-  nodejs_version: "6"
+  nodejs_version: "8"
+
+cache: 
+  - packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
+  - node_modules                    # local npm modules
 
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
-  # install modules
-  - npm install
+  - ps: .\build.ps1
 
-# Post-install test scripts.
-#test_script:
-  # Output useful info for debugging.
-  #- node --version
-  #- npm --version
-  # run tests
-  #- npm test
+before_build:
+  - nuget restore samples\GitHub\output\OutTest.sln
 
-# Don't actually build.
-build: off
+build:
+  project: samples\GitHub\output\OutTest.sln

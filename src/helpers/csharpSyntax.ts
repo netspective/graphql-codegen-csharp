@@ -56,6 +56,11 @@ export function getType(type, options) {
         if(realType == "LocalTime"){
             return "DateTime";
         }
+
+        if(realType == "URI"){
+            return "Uri";
+        }
+        
         return realType;
     }
 }
