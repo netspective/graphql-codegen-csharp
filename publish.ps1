@@ -24,9 +24,13 @@ $jsonText = ConvertTo-Json -InputObject $packageJson
 $jsonText | Out-File $packagePath -Encoding ascii
 
 if($isAppVeyor){
-    "//registry.npmjs.org/:_authToken=`$`{NPM_TOKEN`}" | Out-File (Join-Path $ENV:APPVEYOR_BUILD_FOLDER ".npmrc") -Encoding UTF8
-    iex "npm pack"
-    iex "npm publish"
+
+    Write-Host "APPVEYOR_REPO_BRANCH: $($env:APPVEYOR_REPO_BRANCH)"
+    Write-Host "APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH: $($env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)"
+
+    #"//registry.npmjs.org/:_authToken=`$`{NPM_TOKEN`}" | Out-File (Join-Path $ENV:APPVEYOR_BUILD_FOLDER ".npmrc") -Encoding UTF8
+    #iex "npm pack"
+    #iex "npm publish"
 }
 else{   
     npm publish
