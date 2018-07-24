@@ -25,12 +25,11 @@ $jsonText | Out-File $packagePath -Encoding ascii
 
 if($isAppVeyor){
 
-    Write-Host "APPVEYOR_REPO_BRANCH: $($env:APPVEYOR_REPO_BRANCH)"
-    Write-Host "APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH: $($env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)"
-
-    #"//registry.npmjs.org/:_authToken=`$`{NPM_TOKEN`}" | Out-File (Join-Path $ENV:APPVEYOR_BUILD_FOLDER ".npmrc") -Encoding UTF8
-    #iex "npm pack"
-    #iex "npm publish"
+    if($env:APPVEYOR_REPO_BRANCH -eq "master"){
+        "//registry.npmjs.org/:_authToken=`$`{NPM_TOKEN`}" | Out-File (Join-Path $ENV:APPVEYOR_BUILD_FOLDER ".npmrc") -Encoding UTF8
+        iex "npm pack"
+        iex "npm publish"
+    }
 }
 else{   
     npm publish
