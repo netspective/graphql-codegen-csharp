@@ -28,7 +28,6 @@ if($isAppVeyor){
     iex "npm pack"
     iex "npm publish"
 }
-else{
-    npm pack
+else{   
     npm publish
 }
