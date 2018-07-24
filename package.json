@@ -1,64 +1,66 @@
 {
-  "name": "agoda-graphql-codegen-csharp",
-  "version": "0.0.1",
-  "description": "---",
-  "license": "MIT",
-  "scripts": {
-    "prepublishOnly": "yarn build",
-    "build": "codegen-handlebars-templates-scripts build",
-    "pretest": "yarn build",
-    "test": "codegen-handlebars-templates-scripts test"
-  },
-  "devDependencies": {
-    "@types/common-tags": "1.4.0",
-    "awesome-typescript-loader": "^5.2.0",
-    "codegen-handlebars-templates-scripts": "0.9.1",
-    "common-tags": "1.8.0",
-    "graphql-code-generator": "^0.10.3",
-    "graphql-codegen-compiler": "0.9.1",
-    "graphql-codegen-core": "0.9.1",
-    "tslint": "^5.11.0",
-    "typescript": "^2.9.2"
-  },
-  "main": "./dist/index.js",
-  "typings": "dist/index.d.ts",
-  "typescript": {
-    "definition": "dist/index.d.ts"
-  },
-  "jest": {
-    "globals": {
-      "ts-jest": {
-        "enableTsDiagnostics": false
-      }
-    },
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
-  },
-  "dependencies": {
-    "dist": "^0.1.2",
-    "file": "^0.2.2",
-    "graphql": "^0.13.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/agoda-com/graphql-codegen-csharp.git"
-  },
-  "keywords": [
-    "graphql"
-  ],
-  "author": "Agoda",
-  "bugs": {
-    "url": "https://github.com/agoda-com/graphql-codegen-csharp/issues"
-  },
-  "homepage": "https://github.com/agoda-com/graphql-codegen-csharp#readme"
+    "name":  "agoda-graphql-codegen-csharp",
+    "version":  "0.0.4",
+    "description":  "---",
+    "license":  "MIT",
+    "scripts":  {
+                    "prepublishOnly":  "yarn build",
+                    "build":  "codegen-handlebars-templates-scripts build",
+                    "pretest":  "yarn build",
+                    "test":  "codegen-handlebars-templates-scripts test"
+                },
+    "devDependencies":  {
+                            "@types/common-tags":  "1.4.0",
+                            "awesome-typescript-loader":  "^5.2.0",
+                            "codegen-handlebars-templates-scripts":  "0.9.1",
+                            "common-tags":  "1.8.0",
+                            "graphql-code-generator":  "^0.10.3",
+                            "graphql-codegen-compiler":  "0.9.1",
+                            "graphql-codegen-core":  "0.9.1",
+                            "tslint":  "^5.11.0",
+                            "typescript":  "^2.9.2"
+                        },
+    "main":  "./dist/index.js",
+    "typings":  "dist/index.d.ts",
+    "typescript":  {
+                       "definition":  "dist/index.d.ts"
+                   },
+    "jest":  {
+                 "globals":  {
+                                 "ts-jest":  "@{enableTsDiagnostics=False}"
+                             },
+                 "transform":  {
+                                   "^.+\\.tsx?$":  "ts-jest"
+                               },
+                 "testRegex":  "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+                 "moduleFileExtensions":  [
+                                              "ts",
+                                              "tsx",
+                                              "js",
+                                              "jsx",
+                                              "json",
+                                              "node"
+                                          ]
+             },
+    "dependencies":  {
+                         "dist":  "^0.1.2",
+                         "file":  "^0.2.2",
+                         "graphql":  "^0.13.2"
+                     },
+    "repository":  {
+                       "type":  "git",
+                       "url":  "git+https://github.com/agoda-com/graphql-codegen-csharp.git"
+                   },
+    "keywords":  [
+                     "graphql",
+                     "c#",
+                     "csharp",
+                     "query",
+                     "agoda"
+                 ],
+    "author":  "Agoda",
+    "bugs":  {
+                 "url":  "https://github.com/agoda-com/graphql-codegen-csharp/issues"
+             },
+    "homepage":  "https://github.com/agoda-com/graphql-codegen-csharp#readme"
 }

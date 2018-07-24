@@ -17,3 +17,6 @@ before_build:
 
 build:
   project: samples\GitHub\output\OutTest.sln
+
+after_build:
+  - ps: .\publish.ps1
