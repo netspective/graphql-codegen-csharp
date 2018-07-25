@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+temp
+yarn-error.log
+/samples
+/src
+appveyor.yml
+publish.ps1
+build.ps1
+yarn.lock
+/dist/helpers
+/dist/*.ts
+/dist/*.map
+tsconfig.json
+*.tgz

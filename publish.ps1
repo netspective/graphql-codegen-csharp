@@ -31,6 +31,6 @@ if($isAppVeyor){
         iex "npm publish"
     }
 }
-else{   
+else{       
     npm publish
 }
