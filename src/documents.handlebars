@@ -13,7 +13,7 @@ namespace Generated
         object GetParsedObject(string jsonText);
     }
 
-    public interface IQuery<T> : IQuery
+    public interface IQuery<out T> : IQuery
     {
         new T GetParsedObject(string jsonText);
     }
