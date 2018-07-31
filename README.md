@@ -1,3 +1,7 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/f61k8b4hcwv8gdy2?svg=true)](https://ci.appveyor.com/project/jenol/graphql-codegen-csharp)
+[![Build status](https://ci.appveyor.com/api/projects/status/f61k8b4hcwv8gdy2/branch/master?svg=true)](https://ci.appveyor.com/project/jenol/graphql-codegen-csharp/branch/master)
+
+
 # CSharp Generator for Queries
 
 We forked @netspective 's (Thanks dude!) project and changed it so the templates emit only the query objects and models. In our case it is better to work off the queries than having a query builder. 
