@@ -9,7 +9,7 @@ export function toCsharpComment(text: string): SafeString {
     if(text === undefined || text === null || text === "") {
         return new SafeString("");
     }
-    return new SafeString(`/// <summary>${text}</sumary>`);
+    return new SafeString(`/// <summary>${text.replace(/\r?\n|\r/g, " ")}</sumary>`);
 }
 
 export function asQueryUnescapedText(text: string): SafeString {
@@ -36,7 +36,7 @@ export function asArgumentList(variables: Variable[], options: any): string {
 
 export function getType(type: any, options: any): string {
     if (!type) {
-      return "";
+      return "object";
     }
     const baseType: any = type.type;
     const realType: any = options.data.root.primitivesMap[baseType] || baseType;

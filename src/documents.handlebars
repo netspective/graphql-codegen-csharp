@@ -26,13 +26,13 @@ namespace Generated.{{ toPascalCase name }}
 {
 
     {{ toCsharpComment "Operation Type" }}
-    public class {{ toPascalCase operationType }} : IQuery<Data>
+    public class {{{ toPascalCase operationType }}} : IQuery<Data>
     { 
     {{#each variables}}
-        private readonly {{ convertedType this }} _{{ name }};
+        private readonly {{{ convertedType this }}} _{{ name }};
     {{/each}}
 
-        public {{ toPascalCase operationType }}({{asArgumentList variables}})
+        public {{ toPascalCase operationType }}({{{asArgumentList variables}}})
         {
       {{#each variables}}
             _{{ name }} = {{ name }};

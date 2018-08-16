@@ -15,7 +15,7 @@
         "awesome-typescript-loader": "^5.2.0",
         "codegen-handlebars-templates-scripts": "0.9.1",
         "common-tags": "1.8.0",
-        "graphql-code-generator": "^0.10.3",
+        "graphql-code-generator": "^0.10.7",
         "graphql-codegen-compiler": "0.9.1",
         "graphql-codegen-core": "0.9.1",
         "tslint": "^5.11.0",

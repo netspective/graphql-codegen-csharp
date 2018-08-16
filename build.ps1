@@ -32,6 +32,8 @@ Write-Output "Query Path:    $queryPath"
 Write-Output "Template Path: $templatePath"
 
 try{
+    Write-Output "yarn gql-gen --schema $schemaPath --template $templatePath --out $outPath $queryPath --non-interactive"
+
     $a = yarn gql-gen --schema $schemaPath --template $templatePath --out $outPath $queryPath --non-interactive 
 }
 catch{

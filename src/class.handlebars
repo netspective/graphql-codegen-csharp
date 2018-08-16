@@ -4,6 +4,6 @@
     {
 {{#each fields}}
       {{ toCsharpComment description }}
-      public {{ convertedType this }} {{toPascalCase name }} { get; set; } 
+      public {{{ convertedType this }}} {{toPascalCase name }} { get; set; } 
 {{/each}}
     }
