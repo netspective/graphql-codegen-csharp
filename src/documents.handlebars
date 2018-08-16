@@ -44,7 +44,7 @@ namespace Generated.{{ toPascalCase name }}
             {
                 query = @"{{asQueryUnescapedText document}}",
                 variables = new {
-                        {{#each variables}}{{ name }} = _{{ name }},{{/each}}
+                        {{#each variables}}{{ name }} = {{ toPascalCase name }},{{/each}}
                     }
                 });
             }  
