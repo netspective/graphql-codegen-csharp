@@ -1,5 +1,5 @@
 {{#each this}}
 {{ toCsharpComment description }}
 [JsonProperty("{{ name }}")]
-public {{ convertedType this }} {{ toPascalCase name }}{{ getOptionals this }} { get; set; }
+public {{{ convertedType this }}} {{ toPascalCase name }}{{ getOptionals this }} { get; set; }
 {{/each}}

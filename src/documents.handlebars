@@ -35,7 +35,7 @@ namespace Generated.{{ toPascalCase name }}
         }
         
         {{#each variables}}
-        public {{ convertedType this }} {{ toPascalCase name }} { get; }
+        public {{{ convertedType this }}} {{ toPascalCase name }} { get; }
         {{/each}}
 
         public string GetQueryText()
