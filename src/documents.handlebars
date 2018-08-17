@@ -1,7 +1,6 @@
+//
 
-using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+#region Query
 
 // Query start 
 
@@ -19,8 +18,12 @@ namespace Generated
     }
 }
 
+#endregion 
 
 {{#each operations }}
+
+#region {{ toPascalCase name }} 
+
 namespace Generated.{{ toPascalCase name }} 
 {
 
@@ -96,6 +99,11 @@ namespace Generated.{{ toPascalCase name }}
 }
 
 {{/each}}
+
+#endregion
+
+#region fragments
+
 {{#each fragments }}
 
 namespace Generated.{{name}} {
@@ -115,4 +123,4 @@ namespace Generated.{{name}} {
 }
 {{/each}}
 
-// Query end
+#endregion
