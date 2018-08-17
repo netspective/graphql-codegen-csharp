@@ -25,9 +25,9 @@ namespace Generated.{{ toPascalCase name }}
 {
 
     {{ toCsharpComment "Operation Type" }}
-    public class {{ toPascalCase operationType }} : IQuery<Data>
+    public partial class {{ toPascalCase operationType }} : IQuery<Data>
     { 
-        public {{ toPascalCase operationType }}({{asArgumentList variables}})
+        public {{ toPascalCase operationType }}({{{asArgumentList variables}}})
         {
       {{#each variables}}
             {{ toPascalCase name }} = {{ name }};
@@ -38,18 +38,19 @@ namespace Generated.{{ toPascalCase name }}
         public {{{ convertedType this }}} {{ toPascalCase name }} { get; }
         {{/each}}
 
-        public string GetQueryText()
+        public virtual string GetQueryText()
         {
             return JsonConvert.SerializeObject(new
             {
                 query = @"{{asQueryUnescapedText document}}",
                 variables = new {
-                        {{#each variables}}{{ name }} = {{ toPascalCase name }},{{/each}}
+{{#each variables}}                        {{ name }} = {{ toPascalCase name }},
+{{/each}}
                     }
                 });
             }  
 
-            public Data GetParsedObject(string jsonText)
+            public virtual Data GetParsedObject(string jsonText)
             {
                 return JsonConvert.DeserializeObject<Result>(jsonText).Data;
             }
@@ -70,13 +71,13 @@ namespace Generated.{{ toPascalCase name }}
             }
         }
 
-        public class Result
+        public sealed class Result
         {
             [JsonProperty("data")]
             public Data Data { get; set; }
         }
 
-        public class Data
+        public sealed class Data
         {
       {{#if hasFields}}    
             {{> selectionSet fields }}
@@ -86,7 +87,7 @@ namespace Generated.{{ toPascalCase name }}
         {{> fragments this }}
       {{#each innerModels }}
         {{ toCsharpComment "Inner Model" }} 
-        public class {{ modelType }} 
+        public sealed class {{ modelType }} 
         {
       {{#if hasFields}}     
             {{> selectionSet fields }}
@@ -98,14 +99,14 @@ namespace Generated.{{ toPascalCase name }}
 {{#each fragments }}
 
 namespace Generated.{{name}} {
-    public class Fragment
+    public sealed class Fragment
     {
 {{#if hasFields}} {
     {{> selectionSet fields }}
   }{{/if}}{{> fragments this }}
   {{#each innerModels }}
 
-    public class {{ modelType }} 
+    public sealed class {{ modelType }} 
     {
 {{#if hasFields}} { 
     {{> selectionSet fields }}

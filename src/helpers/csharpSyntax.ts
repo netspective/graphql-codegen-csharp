@@ -26,9 +26,9 @@ export function asArgumentList(variables: Variable[], options: any): string {
     for(let i: number = 0; i < variables.length; i++) {
         var variable: any = variables[i];
         var typeName: string = getType(variable, options) || "object";
-        list += `${typeName}  ${variable.name}`;
+        list += `${typeName} ${variable.name}`;
         if(i < variables.length - 1) {
-            list += ",";
+            list += ", ";
         }
     }
     return list;
@@ -80,10 +80,36 @@ export function getOptionals(type: any, options: any): string {
     return "";
 }
 
-export function asJsonString(obj: any): SafeString {
-    return new SafeString(JSON.stringify(obj));
+export function asJsonString(obj: any): string {
+    if(obj === null) {
+        return "null";
+    }
+
+    return JSON.stringify(obj);
 }
 
 export function isMutation(typeName: String): Boolean {
     return typeName.lastIndexOf("Mutation") > -1;
+}
+
+export function getMuationArgumentTypes(classes: [any]): any {
+
+    const names: [string] = classes.map(c => c.name) as [string];
+    const missingClasses: any[] = [];
+
+    classes.forEach(c => {
+        if(c.fields) {
+            c.fields.forEach(f => {
+                if(f.arguments) {
+                    f.arguments.forEach(a => {
+                        if(a.isScalar === false && names.indexOf(a.type) === -1 && missingClasses.indexOf(a.type) === -1) {
+                            missingClasses.push(a.type);
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+    return missingClasses;
 }

@@ -1,0 +1,25 @@
+namespace Generated
+{
+
+#region --------------------------------------------- types
+
+/* Mutation argument types are missing for some reason (Methods, Responsibility, Notifications for SMAPI)
+
+{{#each types}}{{ name }}
+{{/each}}
+
+*/
+
+#endregion 
+
+#region --------------------------------------------- missing types
+
+{{#each (getMuationArgumentTypes types)}}
+public partial class {{ this }}
+{
+}
+{{/each}}
+
+#endregion 
+}
+
