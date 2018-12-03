@@ -14,7 +14,7 @@ For executing the template, install [**graphql-code-generator**](https://github.
 
 Open command prompt and go to working directory.
 
-Execute `yarn add -D graphql-code-generator graphql`
+Execute `yarn add -D graphql-code-generator@v0.10.3 graphql@0.13.2 graphql-codegen-introspection-template@0.10.3`
 
 Clone graphql-codegen-csharp in this directory
 
