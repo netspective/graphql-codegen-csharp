@@ -1,20 +1,8 @@
 {{ toComment description }}
-public class {{ name }}{{#if hasInterfaces}} : {{#each interfaces}}I{{this}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}} {
+public class {{ name }}{{#if hasInterfaces}} : {{#each interfaces}}I{{this}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}} 
+{
     {{#each fields}}
-    {{#if @root.config.immutableTypes }}readonly {{/if}}private {{#ifCond this.type "==" 'Date'}}DateTime{{else}}{{#ifCond this.type "==" 'Email'}}String{{else}}{{#ifCond this.type "==" 'Language'}}String{{else}}{{ convertedType this }}{{/ifCond}}{{/ifCond}}{{/ifCond}} {{toCamelCase name }}{{ getOptionals this }}; {{ toComment description }}
-    {{#if @root.config.immutableTypes }}readonly {{/if}}public {{#ifCond this.type "==" 'Date'}}DateTime{{else}}{{#ifCond this.type "==" 'Email'}}String{{else}}{{#ifCond this.type "==" 'Language'}}String{{else}}{{ convertedType this }}{{/ifCond}}{{/ifCond}}{{/ifCond}} {{toPascalCase name }}{{ getOptionals this }} { get { return {{toCamelCase name }};} set { {{toCamelCase name }} = value; }} {{ toComment description }}
+    {{#if @root.config.immutableTypes }}readonly {{/if}} private {{#ifCond this.type "==" 'Double'}}double{{else}}{{#ifCond this.type "==" 'Url'}}string{{else}}{{#ifCond this.type "==" 'Date'}}DateTimeOffset?{{else}}{{#ifCond this.type "==" 'DateTime'}}DateTimeOffset?{{else}}{{#ifCond this.type "==" 'EmailAddress'}}string{{else}}{{ convertedType this}}{{#ifCond this.type "==" 'Boolean'}}{{#if this.isRequired}}{{else}}?{{/if}}{{else}}{{/ifCond}}{{/ifCond}}{{/ifCond}}{{/ifCond}}{{/ifCond}}{{/ifCond}} {{toCamelCase name }}{{ getOptionals this }}; {{ toComment description }}
+    {{#if @root.config.immutableTypes }}readonly {{/if}} public {{#ifCond this.type "==" 'Double'}}double{{else}}{{#ifCond this.type "==" 'Url'}}string{{else}}{{#ifCond this.type "==" 'Date'}}DateTimeOffset?{{else}}{{#ifCond this.type "==" 'DateTime'}}DateTimeOffset?{{else}}{{#ifCond this.type "==" 'EmailAddress'}}string{{else}}{{ convertedType this}}{{#ifCond this.type "==" 'Boolean'}}{{#if this.isRequired}}{{else}}?{{/if}}{{else}}{{/ifCond}}{{/ifCond}}{{/ifCond}}{{/ifCond}}{{/ifCond}}{{/ifCond}} {{toPascalCase name }}{{ getOptionals this }} { get { return {{toCamelCase name }};} set { {{toCamelCase name }} = value; }} {{ toComment description }}
     {{/each}}
 }
-{{#ifCond name "!=" 'Query'}}
-public class {{ name }}GraphType : ObjectGraphType<{{ name }}> {
-    public {{ name }}GraphType()
-        {
-            Name = "{{ name }}";
-            Description = "{{ name }} has no description.";
-            {{#fields}}
-                Field(d => d.{{toPascalCase name }} {{#if this.isEnum}}, type: typeof({{this.type}}EnumType){{/if}}{{#ifCond this.raw "==" 'Boolean'}}, type: typeof(BooleanGraphType){{/ifCond}} {{#if this.isType}}, type: typeof({{this.type}}GraphType){{/if}}{{#ifCond this.type "==" 'String'}}, type: typeof(StringGraphType){{/ifCond}}{{#ifCond this.type "==" 'Date'}}, type: typeof(StringGraphType){{/ifCond}}{{#ifCond this.type "==" 'DateTime'}}, type: typeof(StringGraphType){{/ifCond}}{{#ifCond this.type "==" 'Email'}}, type: typeof(StringGraphType){{/ifCond}}{{#if this.isRequired}}{{else}}, nullable: true{{/if}}).Description("{{toPascalCase name }}");              
-                
-            {{/fields}}
-        }
-}
-{{/ifCond}}

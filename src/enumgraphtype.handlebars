@@ -1,0 +1,12 @@
+{{ toComment description }}
+{{#if @root.config.enumsAsTypes }}
+{{else}}
+public class {{ name }}EnumType : EnumerationGraphType<{{ name }}> 
+{
+    public {{ name }}EnumType()
+    {
+        Name = "{{ name }}EnumType";
+        Description = "{{ name }}";
+    }
+}
+{{/if}}

@@ -2,15 +2,16 @@
 {{#if @root.config.enumsAsTypes }}
 public enum {{ name }} = {{#each values }}"{{ value }}"{{#unless @last}} | {{/unless}}{{/each}};
 {{else}}
-public enum {{ name }} {
-{{#each values }}
+public enum {{ name }} 
+{
+  {{#each values }}
   {{value}}{{#unless @last}}, {{/unless}}
-{{/each}}
+  {{/each}}
 }
-public class {{ name }}EnumType : EnumerationGraphType<{{ name }}> {
+{{!-- public class {{ name }}EnumType : EnumerationGraphType<{{ name }}> {
     public {{ name }}EnumType() {
         Name = "{{ name }}EnumType";
         Description = "{{ name }}";
     }
-}
+} --}}
 {{/if}}

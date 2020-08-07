@@ -9,12 +9,12 @@ export function getType(type, options) {
   const baseType = type.type;
   const realType = options.data.root.primitivesMap[baseType] || baseType;
   const useImmutable = !!(options.data.root.config || {}).immutableTypes;
-
+  const isInterface = (type.isInterface) ? 'I':'';
   if (type.isArray) {
     let result = realType;
-    result = `List<${result}>`;
+    result = `List<${isInterface}${result}>`;
     return new SafeString(result);
   } else {
-    return realType;
+    return `${isInterface}${realType}`;
   }
 }
