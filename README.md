@@ -7,6 +7,11 @@ This template reads the *introspection JSON* of a GraphQL schema as an input. Th
 
 The name of the output file can be defined in `src/config.ts`
 
+## Requirements
+
+ - [Node](https://nodejs.org/en/download/)
+ - [Yarn](https://classic.yarnpkg.com/en/docs/install/#windows-stable)
+ 
 ## Usage
 
 For executing the template you can go through the steps below.
