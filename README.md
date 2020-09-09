@@ -46,6 +46,7 @@ Go to working directory and clone graphql-codegen-csharp in the directory
 
 ```
 yarn add -D graphql-code-generator@v0.10.3 graphql@0.13.2 graphql-codegen-introspection-template@0.10.3
+npm install --save @types/babel-types@7.0.8
 cd graphql-codegen-csharp
 npm install
 ```
